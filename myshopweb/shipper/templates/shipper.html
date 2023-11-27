@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %} {% block title %} Shipper {% endblock title %} 
+{% block content %}
+{% load humanize %}
+<div class="wrapper shipper-container col-lg-12 col-md-10 col-10 mx-auto">
+    <!-- Sidebar  -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h3 class ="text-center p-3">Việt Đức Shipper   </h3>
+        </div>       
+    </nav>
+        <div class="container">
+            <div class="table-wrapper">
+                <div class="table-title">
+                </div>        
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr class="style-item">
+                            <th>Mã đơn hàng</th>
+                            <th>Tên khách hàng</th>
+                            <th>Tổng giá</th>
+                            <th>Địa chỉ nhà</th>
+                            <th>Số điện thoại</th>
+                            <th>Thành phố</th>
+                            <th>Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            {%for shipper in shippers%}
+                            {%if not shipper.user.is_shipper%}
+                            <tr class = "order-info">                  
+                                
+                                <td>{{shipper.id}}</td>
+                                {% if shipper.name %}
+                                <td>{{shipper.name}}</td>
+                                {%else%}
+                                <td>Vô danh</td>
+                                {%endif%}                               
+                                <td>{{shipper.total_price|floatformat:0|intcomma}} VNĐ</td>
+                                <td>{{shipper.address}}</td>
+                                <td>{{shipper.phone}}</td>
+                                <td>{{shipper.city}}</td>
+                                <td>      
+                                    <form class ="form-shipper" action="" method="POST">                                
+                                        {% csrf_token %}                     
+                                        <input class ="input_id" hidden readonly type="text" value="{{shipper.id}}" name ="shipper_id" />                                   
+                                        <input class ="input_button" type="submit" value="{{shipper.status}}" name ="status" />
+                                    </form>                
+                                </td>
+                            </tr>
+                            {%endif%}
+                            {%endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script>
+        const button = document.querySelectorAll('.input_button');
+        // const paragraph = document.querySelector('p'); 
+        button.forEach((childbutton,key) => childbutton.addEventListener('click',function updateButton() {
+            if (childbutton.value === 'Đã xác nhận đơn hàng') {
+                childbutton.value = 'Đang giao hàng';
+            } 
+            else if (childbutton.value === 'Đang giao hàng') {
+                childbutton.value = 'Giao hàng thành công';
+            } 
+        }))
+    </script>
+</div>
+{% endblock content %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %} {% load crispy_forms_tags %} {% block title %} OTP 
+{% endblock title %} {% block content %}
+
+{% load crispy_forms_tags %}          
+
+{% include 'messages.html' %}
+<div class="container p-4 d-flex justify-content-center align-items-center flex-column bg-white mt-5 resetpass-container resetpass-shadow">
+     <h4 class="font-weight-bold mt-3">Nhập Mã OTP </h4>
+  <hr>
+      <form method="POST" class="d-flex flex-column row">
+          {% csrf_token %}
+           <input name ="otp" type="text" class="resetpass-input my-3 col-lg-12 col-md-12 col-12" placeholder="" required>                 
+          <button class="btn btn-outline-info feedback-btn profile-btn mx-auto my-2 col-lg-12 col-md-12 col-12" type="submit" Email>Xác nhận</button> 
+      </form>
+  </div> 
+
+{% endblock %}

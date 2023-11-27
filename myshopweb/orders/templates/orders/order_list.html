@@ -1,0 +1,69 @@
+{% extends 'base.html' %} {% block title %}Your Orders {% endblock title %}
+{% block content %}
+<h1 class="font-weight-light mt-3 text-center ">Orders của bạn</h1>
+<hr/>
+<ul class="list-group my-3 resetpass-shadow ">
+  {% for order in orders %}
+  <li class="list-group-item ">
+    <h5 class="mb-2">
+      {% if order.status == 'Delivered' %}
+      <span class="badge badge-success font-weight-light">
+        {{order.status}}
+      </span>
+      {% else %}
+      <span class="badge badge-info font-weight-light">{{order.status}}</span>
+      {% endif %}
+    </h5>
+    <h3>
+      <a href="{%url 'orders:details' order.id %}">Mã đơn hàng-{{order.id}}</a>
+    </h3>
+    {% load humanize %}
+    <h5>{{order.total_price|floatformat:0|intcomma}}VNĐ</h5>
+    <p class="mb-0">{{order.total_items}} Items</p>
+    <p class="mb-0">
+      Địa chỉ - {{order.address}}, {{order.city}}
+    </p>
+    <p class="mb-0">Đặt {{order.created|timesince}} trước.</p>
+  </li>
+  {% empty %}
+  <li class="list-group-item text-center py-4">
+    <h3 class="font-weight-light">Bạn chưa có đơn hàng nào</h3>
+    <a href="{% url 'product:productlist' %}" class="btn btn-outline-info mt-3">
+     Tiếp tục shopping
+    </a>
+  </li>
+  {% endfor %}
+</ul>
+{% if page_obj.has_other_pages %}
+<nav>
+    <ul class="pagination justify-content-center mt-2">
+        {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page=1{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">First</a>
+            </li>
+        {% endif %}
+
+        {% for page_number in page_obj.paginator.page_range %}
+            {% if page_number <= page_obj.number|add:3 and page_number >= page_obj.number|add:-3 %}
+                {% if page_obj.number == page_number %}
+                    <li class="page-item active">
+                        <a class="page-link" href="?page={{ page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">{{ page_number }}</a>
+                    </li>
+                {% else %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">{{ page_number }}</a>
+                    </li>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">
+                    Last
+                </a>
+            </li>
+        {% endif %}
+    </ul>
+</nav>
+{% endif %} {% endblock content %}

@@ -1,0 +1,14 @@
+.form_statistical{
+    width: 253px;
+    height: 182px;
+    background-color: aliceblue;
+    border-radius: 5px;
+}
+
+.form_statistical_item{
+   margin-bottom: 15px;
+   margin-left: 10px;
+}
+.start{
+    margin-left: 4px;
+}

@@ -1,0 +1,20 @@
+.shipper-container{
+    margin: 20px;
+    padding: 20px;
+    box-shadow: 0 1px 20px 0 rgb(0 0 0 / 5%);
+    border-radius: 3px;
+    background-color: rgba(255,255,255,0.4);
+}
+.table td{
+   vertical-align:middle;
+   text-align: center;
+}
+.table thead th{
+    vertical-align: middle;
+    text-align: center;
+}
+.form-shipper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

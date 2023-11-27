@@ -1,0 +1,47 @@
+{% extends 'base.html' %} {% load crispy_forms_tags %} {% block title %} Place
+Order {% endblock title %} {% block content %}
+<div class="row my-3">
+  <div class="col-md-6 col-lg-6 col-12 mb-3">
+    <div class="card card-border">
+      <h3 class="card-header text-center">Thông tin chi tiết</h3>
+      <div class="card-body">
+      {% load humanize %}
+        {% for i in summary %}
+        <p class="card-text d-flex justify-content-between mb-2">
+          <span class="d-block m-2">{{i.product.name|truncatewords:6}}  x {{i.quantity}} </span>
+          <span class="d-block m-2">{{i.total|floatformat:0|intcomma}} VND</span>
+        </p>
+        {% empty %}
+        <h5 class="card-text font-weight-light">No items in cart.</h5>
+        {% endfor %}
+        <h4 class="card-text text-right">
+          <span class="badge badge-primary">
+            Grand Total - <b>{{cart.get_total_price|floatformat:0|intcomma}}VNĐ</b>
+          </span>
+        </h4>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 col-md-6 col-12 mb-3">
+    <div class="card card-border">
+    <h4 class="card-header text-center">Đơn hàng </h4>
+    <div class="card card-body">
+      <form method="POST" class="d-flex flex-column row">     
+        {% csrf_token %}
+        <label class="mb-2">Tên người nhận</label>
+        <input name ="name" type="text" class="resetpass-input my-2 col-lg-12 col-md-12 col-12 w-100" placeholder="Nhập tên người nhận" required>                 
+        <label class="mb-2">Địa chỉ nhà</label>
+        <input name ="address" type="text" class="resetpass-input my-2 col-lg-12 col-md-12 col-12 w-100" placeholder="Nhập địa chỉ" required>
+        <label class="mb-2">Số điện thoại</label>
+        <input name ="phone" type="text" class="resetpass-input my-2 col-lg-12 col-md-12 col-12 w-100" placeholder="Nhập số điện thoại" required>                 
+        <label class="mb-2">Thành Phố</label>
+        <input name ="city" type="text" class="resetpass-input my-2 col-lg-12 col-md-12 col-12 w-100" placeholder="Nhập thành phố" required>                 
+        <label class="mb-2">Mã bưu điện</label>
+        <input name ="pin_code" type="text" class="resetpass-input my-2 col-lg-12 col-md-12 col-12 w-100" placeholder="Nhập mã bưu điện" required>                 
+        <button class="btn btn-outline-info feedback-btn profile-btn mx-auto my-2 col-lg-12 col-md-12 col-12" type="submit">Đặt hàng</button> 
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock content %}

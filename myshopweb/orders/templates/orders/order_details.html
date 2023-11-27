@@ -1,0 +1,44 @@
+{% extends 'base.html' %} {% load thumbnail %} {% block title %} Hóa đơn -
+{{order.id}} {% endblock title %} {% block content %}
+<h2 class="mt-4" style="color:#007bff ;">Mã đặt - {{orders.id}}</h2>
+{% comment %}
+<h4 class="font-weight-light">
+  {{orders.user.username}}
+</h4>
+{% endcomment %}
+<h5>Người nhận: {{orders.name}}</h5>
+<h5>Số điện thoại: {{orders.phone}}</h5>
+<h5>
+  Địa chỉ: {{orders.address}}, {{orders.city}}, {{orders.pin_code}}
+</h5>
+<h5>Trạng thái: <span class="badge badge-info">{{orders.status}}</span></h5>
+<h5>Thời gian: {{orders.created}}</h5>
+<h3>Sản phẩm</h3>
+<ul>
+  {% for o in orders.items.all %}
+  <li
+    class="list-group-item d-flex align-items-center justify-content-between flex-column flex-md-row"
+  >
+    <div class="d-flex align-items-center">
+      <img
+        src="{% thumbnail o.product.image 75x0 %}"
+        alt="{{o.product.name}}"
+        class="img-fluid"
+      />
+      <h5 class="ml-3 mb-0 col-10 col-md-10 col-lg-10">
+        <a href="{{o.product.get_absolute_url}}">{{o.product.name}}</a>
+      </h5>
+    </div>
+    <h5 class="mb-0 col-2 col-md-2 col-lg-2">
+      {% load humanize %}
+      {{o.product.price|floatformat:0|intcomma}} VNĐ * {{o.quantity}}
+    </h5>
+  </li>
+  {% endfor %}
+  <li class="list-group-item bg-primary text-white">
+    <h5 class="mb-0 text-right">
+      Total - <b>{{orders.total_price|floatformat:0|intcomma}} VNĐ</b>
+    </h5>
+  </li>
+</ul>
+{% endblock content %}

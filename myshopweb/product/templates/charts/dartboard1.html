@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- bootstrap file -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- bootstrap file-->
+    <title>FC-python wrapper</title>
+    {% load static %}
+    <script type="text/javascript" src="{% static "fusioncharts/fusioncharts.js" %}"></script>
+    <script type="text/javascript" src="{% static "fusioncharts/fusioncharts.charts.js" %}"></script>
+
+    <!-- Css link -->
+    <link rel="stylesheet" href="{% static 'fusioncharts/datepicker.css' %}">
+</head>
+    <body>
+        <a href="{%url 'product:statis_admin'%}" class="btn btn-success" style="font-weight: bold; float: right;">
+            <i class="fa fa-sign-in fa-lg mr-2"></i> Admin Statis
+        </a>
+        <form action="" class="form_statistical ">
+            <select class="form-control selcls form_statistical_item" name="flag" id="" style="width: 150px;">
+                <option value="0">Tất cả</option>
+                <option value="1">Đã bán</option>
+            </select>
+            <button class="btn btn-success form_statistical_item">Thống kê</button>
+        </form>        
+        <div id="myFirstchart-container">{{ output|safe }}</div> 
+    </body>
+</html>

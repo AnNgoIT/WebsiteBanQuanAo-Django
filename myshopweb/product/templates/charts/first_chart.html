@@ -1,0 +1,53 @@
+{% extends 'charts/base.html' %}
+{% block title %}First Chart {% endblock title%}
+
+{% block content %}
+<div class="container">
+    <div class="title">Biểu đồ thể hiện số lượng sản phẩm theo loại sản phẩm</div>
+    <canvas id="canvas"></canvas>
+</div>
+{% endblock content%}
+
+{% block scripts %}
+
+    <script>
+        const labels = {{labels|safe}}
+        const data = {
+            labels: labels,
+            datasets: [{
+                label:'',
+                data: {{data|safe}},
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(201, 203, 207, 0.2)'
+                ],
+                borderColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(255, 159, 64)',
+                    'rgb(255, 205, 86)',
+                    'rgb(75, 192, 192)',
+                    'rgb(54, 162, 235)',
+                    'rgb(153, 102, 255)',
+                    'rgb(201, 203, 207)'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        const config = {
+            type: 'bar',
+            data: data,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            },
+        };
+        const canvas = document.getElementById('canvas')
+        const chart = new Chart(canvas, config)
+    </script>
+{% endblock scripts %}

@@ -49,6 +49,7 @@ class CreateOrder(LoginRequiredMixin, generic.CreateView):
             q = cart.cart[str(i.id)]['quantity']
             orderitems.append(
                 OrderItem(order=order, product=i, quantity=q, total=q*i.price))
+            Product.objects.filter(id=i.pk).update(quantity=i.quantity-q)
         OrderItem.objects.bulk_create(orderitems)
         cart.clear()
         messages.success(self.request, 'Đặt hàng thành công')

@@ -61,7 +61,6 @@ class ProfileView(generic.ListView):
     
     def post(self,request, *args, **kw):
         data = request.POST      
-          
         User.objects.filter(email=data['email']).update(full_name =data['full_name']
         ,phone_number=data['phone_number'],date =data['date'],address=data['address'])
         return render(request,'profile.html')

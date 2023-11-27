@@ -21,6 +21,8 @@ from django.conf.urls.static import static
 from customer.views import admin_view
 from django.views.defaults import permission_denied
 from django.contrib.auth import views as auth
+from django.contrib.auth.views import LogoutView
+
 admin.site.site_header = "VietDuc Shop"
 admin.site.index_title = "VietDuc Shop"
 admin.site.site_title = "VietDuc Shop"
@@ -29,6 +31,7 @@ urlpatterns = [
     path("customer/",include("customer.urls")),
     path("feedback/",include("feedback.urls")),
     path('admin/login/', permission_denied, kwargs={'exception': Exception('Permission Denied')}),
+    path('admin/logout/', LogoutView.as_view(next_page = '/customer/login',),name="logout"),
     path('admin/', admin.site.urls),
     path('cart/', include('cart.urls', namespace='cart')),
     path('orders/', include('orders.urls', namespace='orders')),

@@ -22,7 +22,7 @@
       {% load humanize %}
       <h3 class="font-weight-light details-price"> {{product.price|floatformat:0|intcomma}} VNĐ </h3>
       <h4>
-        {% if product.status == 0%}
+        {% if product.status == 0 and product.quantity > 0 %}
         <span class="badge badge-success">Còn {{product.quantity}} sản phẩm</span>
         {% else %}
         <span class="badge badge-danger">Hết hàng</span>
@@ -66,9 +66,11 @@
         {% csrf_token %}
         <input type="hidden" name="quantity" value="1" />
         <input type="hidden" name="product_id" value="{{product.id}}" />
+        {% if product.status == 0 and product.quantity > 0 %}
         <button type="submit" class="btn btn-primary">
           <i class="fa fa-cart-plus fa-lg mr-2"></i> Thêm vào giỏ
         </button>
+        {%endif%}
       </form>
       {%elif user.is_shipper%}
       {% else %}

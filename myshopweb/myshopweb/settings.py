@@ -74,7 +74,7 @@ ROOT_URLCONF = 'myshopweb.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS':[os.path.join(BASE_DIR, 'templates')] ,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -101,10 +101,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'shop_web',
-        'PASSWORD':'Phat@0105',
-        'USER':'root',
-        'POST':'localhost',
-        'PORT':'',
+        'PASSWORD': '123456',
+        'USER': 'root',
+        'POST': 'localhost',
+        'PORT': '3306',
     }
 }
 
@@ -126,25 +126,25 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 PASSWORD_HASHERS = [
-  'django.contrib.auth.hashers.PBKDF2PasswordHasher',
-  'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
-  'django.contrib.auth.hashers.Argon2PasswordHasher',
-  'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
-  'django.contrib.auth.hashers.BCryptPasswordHasher',
-  'django.contrib.auth.hashers.SHA1PasswordHasher',
-  'django.contrib.auth.hashers.MD5PasswordHasher',
-  'django.contrib.auth.hashers.UnsaltedSHA1PasswordHasher',
-  'django.contrib.auth.hashers.UnsaltedMD5PasswordHasher',
-  'django.contrib.auth.hashers.CryptPasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+    'django.contrib.auth.hashers.Argon2PasswordHasher',
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+    'django.contrib.auth.hashers.BCryptPasswordHasher',
+    'django.contrib.auth.hashers.SHA1PasswordHasher',
+    'django.contrib.auth.hashers.MD5PasswordHasher',
+    'django.contrib.auth.hashers.UnsaltedSHA1PasswordHasher',
+    'django.contrib.auth.hashers.UnsaltedMD5PasswordHasher',
+    'django.contrib.auth.hashers.CryptPasswordHasher',
 ]
 AUTHENTICATION_BACKENDS = [
-  'social_core.backends.facebook.FacebookOAuth2',
-  'social_core.backends.google.GoogleOAuth2',
-  'django.contrib.auth.backends.ModelBackend',
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
 ]
-SOCIAL_AUTH_FACEBOOK_KEY ='596626712147467'
-SOCIAL_AUTH_FACEBOOK_SECRET ='966c50af0f0f599cd9240c0d73619284'
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY= '288721920080-1opgl0hrkjhphjih8cl2vmek6rm794cm.apps.googleusercontent.com'
+SOCIAL_AUTH_FACEBOOK_KEY = '596626712147467'
+SOCIAL_AUTH_FACEBOOK_SECRET = '966c50af0f0f599cd9240c0d73619284'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '288721920080-1opgl0hrkjhphjih8cl2vmek6rm794cm.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 SOCIAL_AUTH_URL_NAMESPACE = "customer:social"
 AUTH_USER_MODEL = 'customer.User'
@@ -166,12 +166,12 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR,'static')
+    os.path.join(BASE_DIR, 'static')
 ]
 
 MEDIA_URL = 'media/'
 MERIA_ROOT = [
-    os.path.join(BASE_DIR,'media/')
+    os.path.join(BASE_DIR, 'media/')
 ]
 SETTINGS_PATH = 'templates'
 TEMPLATE_DIRS = (
@@ -191,17 +191,17 @@ SESSION_EXPIRE_SECONDS = 86400
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-EMAIL_HOST= "smtp.gmail.com"
-EMAIL_PORT= 578
-EMAIL_USER= ""
-EMAIL_HOST_USER='thoitrangvietductest@gmail.com'
-EMAIL_HOST_PASSWORD='oqouljvofoeccdsy'
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 578
+EMAIL_USER = ""
+EMAIL_HOST_USER = 'thoitrangvietductest@gmail.com'
+EMAIL_HOST_PASSWORD = 'oqouljvofoeccdsy'
 
 # EMAIL_USE_SSL = True
-#JAZZMIN_SETTINGS 
+# JAZZMIN_SETTINGS
 JAZZMIN_SETTINGS = {
     "site_title": "VietDuc Shop Admin",
     "topmenu_links": [
-    {"name":"VietDuc HomePage","url":"https://127.0.0.1:8000/"}
+        {"name": "VietDuc HomePage", "url": "https://127.0.0.1:8000/"}
     ]
 }

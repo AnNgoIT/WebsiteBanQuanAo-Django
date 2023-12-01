@@ -1,5 +1,5 @@
-{% extends 'base.html' %} {% block title %} Cart {% endblock title %}
-{% block content %}
+{% extends 'base.html' %} {% block title %} Cart {% endblock title %} {% block
+content %}
 <h1 class="display-5 mt-4 text-center">Giỏ hàng</h1>
 <hr />
 {% if total %}
@@ -16,8 +16,7 @@
         </tr>
       </thead>
       <tbody>
-      {% load humanize %}
-        {% for i in cart_items %}
+        {% load humanize %} {% for i in cart_items %}
         <tr>
           <td>
             <a href="{{i.product.get_absolute_url}}"> {{i.product.name}} </a>
@@ -29,8 +28,7 @@
               class="form-inline"
               method="POST"
             >
-              {% csrf_token %}
-              {{i.form.product_id}}
+              {% csrf_token %} {{i.form.product_id}}
               <div class="input-group">
                 {{i.form.quantity}}
                 <div class="input-group-append">
@@ -68,7 +66,7 @@
   <a href="{% url 'orders:place' %}" class="btn btn-success">Thanh Toán</a>
 </div>
 {% else %}
-<div class="text-center resetpass-shadow  p-4 bg-white">
+<div class="text-center resetpass-shadow p-4 bg-white">
   <h3 class="font-weight-light">Giỏ hàng trống</h3>
   <a href="{% url 'product:productlist' %}" class="btn btn-outline-info mt-4">
     Trở lại cửa hàng

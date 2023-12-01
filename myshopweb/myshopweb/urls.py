@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.http import HttpRequest
-from django.urls import path,include
+from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from customer.views import admin_view
@@ -27,14 +27,16 @@ admin.site.site_header = "VietDuc Shop"
 admin.site.index_title = "VietDuc Shop"
 admin.site.site_title = "VietDuc Shop"
 urlpatterns = [
-    path("",include("product.urls")),
-    path("customer/",include("customer.urls")),
-    path("feedback/",include("feedback.urls")),
-    path('admin/login/', permission_denied, kwargs={'exception': Exception('Permission Denied')}),
-    path('admin/logout/', LogoutView.as_view(next_page = '/customer/login',),name="logout"),
+    path("", include("product.urls")),
+    path("customer/", include("customer.urls")),
+    path("feedback/", include("feedback.urls")),
+    path('admin/login/', permission_denied,
+         kwargs={'exception': Exception('Permission Denied')}),
+    path('admin/logout/', LogoutView.as_view(next_page='/customer/login',), name="logout"),
     path('admin/', admin.site.urls),
     path('cart/', include('cart.urls', namespace='cart')),
     path('orders/', include('orders.urls', namespace='orders')),
     path('shipper/', include('shipper.urls', namespace='shipper')),
-    path('api/password_reset/', include('django_rest_passwordreset.urls', namespace='password_reset'))
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('api/password_reset/',
+         include('django_rest_passwordreset.urls', namespace='password_reset'))
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

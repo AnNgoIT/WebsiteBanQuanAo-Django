@@ -7,7 +7,7 @@ from django.db.models import Count
 from product.models import Product
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator 
+from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
 from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
@@ -27,8 +27,7 @@ class CreateOrder(LoginRequiredMixin, generic.CreateView):
         context['summary'] = cart_items
         return context
     # def post(request,*args, **kwargs):
-        
-        
+
     def form_valid(self, form):
         # data =request.POST
         # address = data['address']
@@ -47,9 +46,15 @@ class CreateOrder(LoginRequiredMixin, generic.CreateView):
         orderitems = []
         for i in products:
             q = cart.cart[str(i.id)]['quantity']
-            orderitems.append(
-                OrderItem(order=order, product=i, quantity=q, total=q*i.price))
-            Product.objects.filter(id=i.pk).update(quantity=i.quantity-q)
+            quantityInDB = Product.objects.filter(id=i.pk).get().quantity
+            if quantityInDB > q:
+                orderitems.append(
+                    OrderItem(order=order, product=i, quantity=q, total=q*i.price))
+                Product.objects.filter(id=i.pk).update(quantity=i.quantity-q)
+            else:
+                messages.error(
+                    self.request, f"Chỉ còn {quantityInDB} sản phẩm")
+                return redirect('product:productlist')
         OrderItem.objects.bulk_create(orderitems)
         cart.clear()
         messages.success(self.request, 'Đặt hàng thành công')
@@ -90,13 +95,6 @@ class OrderInvoice(LoginRequiredMixin, generic.DetailView):
         if obj.user_id == self.request.user.id or self.request.user.is_superuser:
             return obj
         raise Http404
-
-
-
-
-
-
-
 
 
 # decorators2 = [never_cache, login_required(login_url='/')]
